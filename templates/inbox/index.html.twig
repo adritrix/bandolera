@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InboxController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    #inbox {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#inbox td, #inbox th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#inbox tr:nth-child(even){background-color: #f2f2f2;}
+
+#inbox tr:hover {background-color: #ddd;}
+
+#inbox th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.notRead{
+    background-color:red;
+}
+
+.read{
+    background-color:blue;
+}
+</style>
+<script>
+
+window.onload=main;
+</script>
+<div>
+
+<table id="inbox">
+    <tr> 
+    <th>Message_ID</th>
+    <th>Subject</th>
+    <th>IsRead</th>
+    </tr>
+    {% for regist in app.user.regists %}
+        <tr>
+            <td><a href="{{ path('full_message_inbox', {regist: regist.id, ckUser:app.user.id} )}}">{{regist.message.id}}</a></td>
+            <td><a href="{{ path('full_message_inbox', {regist: regist.id, ckUser:app.user.id} )}}">{{regist.message.subject}}</a></td>
+            {% if regist.isread != 0 %}
+                <td class="read"><a href="{{ path('full_message_inbox', {regist: regist.id, ckUser:app.user.id} )}}">Message already readed</a></td>
+            {% else %}
+                <td class="notRead"><a href="{{ path('full_message_inbox', {regist: regist.id, ckUser:app.user.id} )}}">Message not yet readed</a></td>
+            {% endif %}
+            {# <td>{{regist.message.subject}}</td> #}
+        </tr>
+    {% endfor %}
+</table>
+
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OutboxController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    #inbox {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#inbox td, #inbox th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#inbox tr:nth-child(even){background-color: #f2f2f2;}
+
+#inbox tr:hover {background-color: #ddd;}
+
+#inbox th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/bandoleraMk2/src/Controller/OutboxController.php'|file_link(0) }}">src/Controller/OutboxController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/bandoleraMk2/templates/outbox/index.html.twig'|file_link(0) }}">templates/outbox/index.html.twig</a></code></li>
+    </ul>
+</div>
+
+<div>
+<table id="inbox">
+    <tr> 
+    <th>Message_ID</th>
+    <th>Subject</th>
+    <th>Target</th>
+    </tr>
+    {% for message in app.user.messages %}
+        {% for regist in message.regists %}
+            <tr>
+                <td><a href="{{ path('full_message_outbox', {message_id: message.id} )}}">{{message.id}}</a></td>
+                <td><a href="{{ path('full_message_outbox', {message_id: message.id})}}">{{message.subject}}</a></td>
+                <td><a href="{{ path('full_message_outbox', {message_id: message.id} )}}">{{regist.reciver.username}}</a></td>
+            </tr>
+        {% endfor %}
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

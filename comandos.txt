@@ -1,0 +1,54 @@
+#Inicializar simfony
+symfony new bandoleraMk2 --webapp
+
+#Gestion base de datos
+DATABASE_URL="mysql://root:@127.0.0.1:3306/bandoleramk2?serverVersion=5.7&charset=utf8mb4"
+
+#Iniciar servidor
+symfony server:start
+
+#Comprobar controladores 
+php bin/console debug:router
+
+#Crear entidades de las bases de datos
+php bin/console make:entity
+
+#Problema con la syncronia de las metadatas de las bases de datos
+https://ourcodeworld.co/articulos/leer/1645/como-resolver-la-excepcion-de-symfony-6-the-metadata-storage-is-not-up-to-date-please-run-the-sync-metadata-storage-command-to-fix-this-issue
+
+#Creaer entidad ususario 
+php bin/console make:user
+
+#habilitar hasheo 
+
+php bin/console make:auth
+
+# Asociaciones de relacionas en doctrine 
+con el mismo comando que el de crear entedades pero sen la columno poner relation
+
+#generar controlador nuevo 
+php bin/console make:controller 
+
+# Generar formulario para el registro
+php bin/console make:registration-form 
+
+# paquete para la verificacion por correo del nuevo usuario 
+composer require symfonycasts/verify-email-bundle
+
+#Para los correos en general
+composer require symfony/mailer
+composer require symfony/google-mailer
+
+
+#Variables glovales de la aplicacion
+https://symfony.com/doc/2.8/templating/app_variable.html
+
+#Repetir la contraseña e un form
+https://symfony.com/doc/current/reference/forms/types/repeated.html
+
+#Restringir el acceso a paginas de la aplicacion
+Se hace en el securiti.yml justo debajo del firewal donde pone acces control. Te fijas en el rol del usuaruio
+https://symfony.com/doc/current/security.html#access-control-authorization
+
+#Añadir mas parametros al controlador ? funciona registration
+https://symfony.com/doc/current/routing.html#extra-parameters

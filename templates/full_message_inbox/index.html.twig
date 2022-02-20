@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FullMessageInboxController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    {# <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/bandoleraMk2/src/Controller/FullMessageInboxController.php'|file_link(0) }}">src/Controller/FullMessageInboxController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/bandoleraMk2/templates/full_message_inbox/index.html.twig'|file_link(0) }}">templates/full_message_inbox/index.html.twig</a></code></li>
+    </ul> #}
+    {% if ckUserId == app.user.id %}
+        <p>Good path</p>
+        {# <pre>
+            {{ dump(regist) }}
+        </pre> #}
+        <p>{{regist.message.id}}</p>
+        <p>{{regist.message.subject}}</p>
+        <p>{{regist.message.body}}</p>
+        <p>{{regist.message.sender.username}}</p>
+    {% else %}
+            <a href="{{ path('inbox')}}">You shoudent be her go back to your inbox</a>
+    {% endif %}
+
+</div>
+{% endblock %}
