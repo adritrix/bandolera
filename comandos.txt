@@ -52,3 +52,8 @@ https://symfony.com/doc/current/security.html#access-control-authorization
 
 #Añadir mas parametros al controlador ? funciona registration
 https://symfony.com/doc/current/routing.html#extra-parameters
+
+
+#Redirigir a un controlador desde otro controlador 
+Si quieres reditigir a un controlador dentro del php  tira un 
+return  $this->redirectToRoute('[nombre_controlador]');  
