@@ -1,33 +1,124 @@
 {% extends 'baseV2.html.twig' %}
 
-{% block title %}Hello FullMessageInboxController!{% endblock %}
+{% block title %}Hello FullMessageInboxController!
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+		#inbox {
+			font-family: Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#inbox td,
+		#inbox th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#inbox tr:nth-child(even) {
+			{
+				# background-color: #f2f2f2; #
+			}
+		}
+
+		#inbox tr:hover {
+			border: 1.5px solid purple;
+		}
+
+		#inbox th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: purple;
+			color: white;
+		}
+
+		.notRead {
+			color: purple;
+			font-weight: bolder;
+
+		}
+
+		.notRead > a {
+			color: purple;
+			font-weight: bolder;
+
+		}
+
+		.read {
+			color: wheat;
+		}
+
+		.read > a {
+			color: wheat;
+		}
+
+
+		.msg {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+			align-items: center;
+
+		}
+
+        button::hover{
+            cursor:pointer;
+        }
+
+        textarea{
+            background-color:purple;
+            color:wheat;
+        }
+	</style>
+
+
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<br>
 
-<div class="example-wrapper">
-    {# <h1>Hello {{ controller_name }}! ✅</h1>
+	<nav id="menu">
+		<div>{{regist.message.sender.id}}</div>
+		<div>{{regist.message.sender.username}}</div>
+		<div>{{regist.message.sender.firtsname}}</div>
+		<div>{{regist.message.sender.secondname}}</div>
+		<div>{{regist.message.sender.email}}</div>
+		<div>{{regist.message.sender.address}}</div>
+		<div>{{regist.message.sender.age}}</div>
+	</nav>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/bandoleraMk2/src/Controller/FullMessageInboxController.php'|file_link(0) }}">src/Controller/FullMessageInboxController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/bandoleraMk2/templates/full_message_inbox/index.html.twig'|file_link(0) }}">templates/full_message_inbox/index.html.twig</a></code></li>
-    </ul> #}
-    {% if ckUserId == app.user.id %}
-        <p>Good path</p>
-        {# <pre>
-            {{ dump(regist) }}
-        </pre> #}
-        <p>{{regist.message.id}}</p>
-        <p>{{regist.message.subject}}</p>
-        <p>{{regist.message.body}}</p>
-        <p>{{regist.message.sender.username}}</p>
-    {% else %}
-            <a href="{{ path('inbox')}}">You shoudent be her go back to your inbox</a>
-    {% endif %}
+	<div class="msg">
+		{% if ckUserId == app.user.id %}
+			<p>{{regist.message.id}}</p>
+			<p>{{regist.message.subject}}</p>
+			<p>{{regist.message.body}}</p>
+		{% else %}
+			<a href="{{ path('inbox')}}">You shoudent be her go back to your inbox</a>
+		{% endif %}
 
-</div>
+	</div>
+
+	<div class="msg">
+		{{ form_start(messageForm) }}
+
+		{{ form_row(messageForm.body) }}
+
+		<button type="submit" class="btn">
+			Answer Back
+		</button>
+		{{ form_end(messageForm) }}
+	</div>
 {% endblock %}

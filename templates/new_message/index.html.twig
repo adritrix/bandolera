@@ -1,0 +1,123 @@
+{% extends 'baseV2.html.twig' %}
+
+{% block title %}Hello NewMessageController!
+{% endblock %}
+{% block stylesheets %}
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+		#outbox {
+			font-family: Arial, Helvetica, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		#outbox td,
+		#outbox th {
+			border: 1px solid #ddd;
+			padding: 8px;
+		}
+
+		#outbox tr:nth-child(even) {
+			{
+				# background-color: #f2f2f2; #
+			}
+		}
+
+		#outbox tr:hover {
+			border: 1.5px solid purple;
+		}
+
+		#outbox th {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			text-align: left;
+			background-color: purple;
+			color: white;
+		}
+
+		.notRead {
+			color: purple;
+			font-weight: bolder;
+
+		}
+
+		.notRead > a {
+			color: purple;
+			font-weight: bolder;
+
+		}
+
+		.read {
+			color: wheat;
+		}
+
+		.read > a {
+			color: wheat;
+		}
+
+
+		.msg {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+			align-items: center;
+
+		}
+
+		.msg > form > div {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+			align-items: center;
+			justify-content: space-around;
+		}
+
+		button::hover {
+			cursor: pointer;
+		}
+
+		select {
+			background-color: wheat;
+		}
+
+        select option: {
+			color: wheat;
+            background-color:purple;
+		}
+
+        select option:checked {
+			color: wheat;
+            background-color:purple;
+		}
+	</style>
+
+
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="msg">
+		{{ form_start(messageForm) }}
+		{{ form_row(messageForm.subject) }}
+		{{ form_row(messageForm.body) }}
+		<select name="posibleRecivers[]" id="posibleRecivers" multiple required>
+			{% for user in usersList %}
+				<option value="{{user.id}}">{{user.username}}</option>
+			{% endfor %}
+			#}
+		</select>
+		<button type="submit" class="btn">Send</button>
+		{{ form_end(messageForm) }}
+	</div>
+
+{% endblock %}

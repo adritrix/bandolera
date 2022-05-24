@@ -1,22 +1,106 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
+{% block stylesheets %}
+	{# {{ encore_entry_link_tags('app') }} #}
+	<style>
+		html {
+			height: 100%;
+			background-color: grey;
+			color: wheat;
+		}
+
+		body {
+			height: 100%;
+
+		}
+
+		a {
+			color: greenyellow;
+		}
+
+		#contenedorPrincipal {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+		}
+
+        form > div{
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+		}
+
+		 button{
+            background-color:wheat;
+            {# color: white; #}
+        }
+
+			<style>
+		html {
+			height: 100%;
+			background-color: grey;
+			color: wheat;
+		}
+
+		body {
+			height: 100%;
+
+		}
+
+		a {
+            color: red;
+		}
+
+		#contenedorPrincipal {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			margin: auto;
+		}
+        #a{
+            background-color:wheat;
+
+			margin: auto;
+        }
+	</style>
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
 
-    <h1>Register</h1>
+	<div id="contenedorPrincipal">
+		
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
+		{{ form_start(registrationForm) }}
+        <h2>Register yourself</h2>
+		{{ form_row(registrationForm.username) }}
+		{{ form_row(registrationForm.email) }}
+		{{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+		{{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+		<button type="submit" class="btn">Register</button>
+		{{ form_end(registrationForm) }}
+		<button id="a" class="btn btn-lg btn-primary" href="{{ path('app_register') }}" type="link">
+				<a href="{{ path('app_login') }}">LogIn</a>
+			</button>
+	</div>
 {% endblock %}
